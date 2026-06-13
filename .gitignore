@@ -1,0 +1,13 @@
+# OS / editor cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*~
+
+# Node / tooling
+node_modules/
+npm-debug.log*
+
+# Local preview server (not needed for the published site)
+serve.cjs

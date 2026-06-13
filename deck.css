@@ -1,0 +1,196 @@
+/* ===================================================================
+   Olympics Unleashed — Daisy Thomas deck
+   Design system. Safe Office fonts. 1920×1080 base.
+   =================================================================== */
+:root{
+  --blue:#3EA0D9;
+  --blue-2:#2C8DC9;
+  --blue-deep:#15486B;
+  --blue-ink:#0E3148;
+  --ink:#1C2B36;
+  --muted:#52606B;
+  --gold:#F5B301;
+  --mist:#EEF6FC;
+  --line:#D9E5EE;
+  --paper:#FFFFFF;
+  --head:"Franklin Gothic Heavy","Arial Black",sans-serif;
+  --body:"Calibri","Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;background:#0b1116;}
+body{font-family:var(--body);-webkit-font-smoothing:antialiased;}
+deck-stage:not(:defined){visibility:hidden;}
+section{background:var(--paper);overflow:hidden;}
+.s{position:absolute;inset:0;}
+
+/* ---------- shared header band ---------- */
+.hdr{
+  position:absolute;top:0;left:0;right:0;height:250px;
+  background:linear-gradient(105deg,var(--blue) 0%,var(--blue-2) 100%);overflow:hidden;
+}
+.hdr::after{
+  content:"";position:absolute;top:-40px;right:-30px;width:620px;height:340px;
+  background-image:repeating-linear-gradient(115deg,rgba(255,255,255,.10) 0 4px, rgba(255,255,255,0) 4px 58px);
+  transform:skewX(-12deg);pointer-events:none;
+}
+.hdr-inner{position:absolute;left:110px;top:46px;right:300px;z-index:2;}
+.kicker{
+  display:flex;align-items:center;gap:14px;white-space:nowrap;
+  font-family:var(--body);font-weight:700;font-size:24px;letter-spacing:.32em;
+  text-transform:uppercase;color:rgba(255,255,255,.95);margin-bottom:10px;
+}
+.kicker .tick{display:block;width:38px;height:5px;border-radius:3px;background:var(--gold);flex:none;}
+.hdr-title{
+  font-family:var(--head);font-weight:400;font-size:88px;line-height:.92;
+  letter-spacing:.005em;text-transform:uppercase;color:#fff;white-space:nowrap;
+}
+.hdr-title.sm{font-size:72px;}
+.hdr-rule{width:96px;height:7px;border-radius:4px;background:var(--gold);margin-top:22px;}
+.hdr-no{
+  position:absolute;right:96px;top:30px;z-index:2;
+  font-family:var(--head);font-weight:400;font-size:150px;line-height:1;
+  color:rgba(255,255,255,.16);letter-spacing:.02em;
+}
+
+/* ---------- body / bullets ---------- */
+.body{position:absolute;left:110px;top:316px;width:880px;}
+.lead{font-family:var(--body);font-weight:700;font-size:42px;color:var(--ink);margin-bottom:38px;line-height:1.12;}
+.lead .hl{color:var(--blue-deep);position:relative;white-space:nowrap;}
+.lead .hl::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:11px;background:rgba(62,160,217,.22);z-index:-1;border-radius:2px;}
+.bullets{list-style:none;display:flex;flex-direction:column;gap:28px;}
+.bullets li{position:relative;padding-left:46px;font-size:31px;line-height:1.3;color:var(--ink);max-width:840px;font-weight:400;}
+.bullets.tight li{font-size:29px;}
+.bullets li .mk{position:absolute;left:0;top:9px;width:18px;height:18px;border-radius:5px;background:var(--blue);box-shadow:0 0 0 5px rgba(62,160,217,.16);}
+.bullets li b{font-weight:700;color:var(--blue-deep);}
+
+/* ---------- photo primitives ---------- */
+.gallery{position:absolute;inset:0;pointer-events:none;}
+.accent-block{position:absolute;border-radius:22px;background:linear-gradient(150deg,var(--blue) 0%,var(--blue-deep) 100%);}
+.photo{position:absolute;border-radius:22px;overflow:hidden;background:var(--mist);
+  box-shadow:0 26px 54px -22px rgba(21,72,107,.55), 0 6px 16px rgba(21,72,107,.18);}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.photo.framed{border:9px solid #fff;}
+.photo .cap{position:absolute;left:0;right:0;bottom:0;padding:30px 22px 16px;
+  font-family:var(--body);font-weight:700;font-size:20px;letter-spacing:.02em;color:#fff;
+  background:linear-gradient(to top,rgba(14,49,72,.85),rgba(14,49,72,0));text-shadow:0 1px 3px rgba(0,0,0,.4);}
+
+/* ---------- footer ---------- */
+.footer-line{position:absolute;left:110px;right:110px;top:980px;height:1px;background:var(--line);}
+.footer-logo{position:absolute;left:110px;top:1006px;height:42px;}
+.footer-meta{position:absolute;right:110px;top:1002px;text-align:right;
+  font-family:var(--head);font-weight:400;font-size:28px;letter-spacing:.06em;color:var(--blue);}
+.footer-meta small{display:block;white-space:nowrap;font-family:var(--body);font-weight:700;font-size:16px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;}
+.baseline{position:absolute;left:0;right:0;bottom:0;height:8px;background:linear-gradient(90deg,var(--blue) 0%,var(--blue-deep) 100%);}
+
+/* footer on dark slides */
+.dark .footer-line{background:rgba(255,255,255,.18);}
+.dark .footer-meta{color:#fff;}
+.dark .footer-meta small{color:rgba(255,255,255,.7);}
+
+/* ===================================================================
+   FULL-BLEED / DARK LAYOUTS (cover, section, closing)
+   =================================================================== */
+.fullbleed{position:absolute;inset:0;background:var(--blue-ink);overflow:hidden;}
+.fb-img{position:absolute;inset:0;}
+.fb-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.fb-scrim{position:absolute;inset:0;}
+/* full-bleed video (slide 2) — 1920×1080 source fills the stage exactly */
+.fb-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000;z-index:2;}
+
+/* ---------- cover ---------- */
+.cover-logo{position:absolute;left:120px;top:120px;height:96px;z-index:3;}
+.cover-content{position:absolute;left:120px;bottom:150px;z-index:3;max-width:1200px;}
+.cover-kicker{font-family:var(--body);font-weight:700;font-size:27px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;}
+.cover-title{font-family:var(--head);font-weight:400;font-size:128px;line-height:.92;text-transform:uppercase;color:#fff;letter-spacing:.005em;}
+.cover-rule{width:120px;height:8px;border-radius:4px;background:var(--gold);margin:36px 0 30px;}
+.cover-sub{font-family:var(--body);font-weight:700;font-size:40px;color:#fff;}
+.cover-sub b{color:var(--gold);font-weight:700;}
+
+/* ---------- section divider ---------- */
+.sec-kicker{position:absolute;z-index:3;font-family:var(--body);font-weight:700;font-size:28px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);}
+.sec-title{position:absolute;z-index:3;font-family:var(--head);font-weight:400;text-transform:uppercase;color:#fff;line-height:.92;letter-spacing:.005em;}
+.sec-rule{position:absolute;z-index:3;height:8px;border-radius:4px;background:var(--gold);}
+
+/* ---------- quote (slide 7) ---------- */
+.quote{position:relative;padding-left:8px;margin-bottom:54px;}
+.quote .qmark{position:absolute;left:-14px;top:-46px;font-family:var(--head);font-size:150px;line-height:1;color:rgba(62,160,217,.22);}
+.qtext{font-family:var(--body);font-weight:700;font-size:42px;line-height:1.28;color:var(--ink);max-width:900px;}
+.qhl{color:var(--blue-deep);position:relative;white-space:nowrap;}
+.qhl::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:11px;background:rgba(62,160,217,.22);z-index:-1;border-radius:2px;}
+.qattr{margin-top:24px;font-family:var(--head);font-weight:400;font-size:26px;letter-spacing:.04em;color:var(--blue);text-transform:uppercase;}
+
+.prompt{display:flex;flex-direction:column;gap:18px;}
+.prompt-label{font-family:var(--body);font-weight:700;font-size:30px;color:var(--ink);}
+.chips{display:flex;gap:16px;flex-wrap:wrap;}
+.chip{font-family:var(--body);font-weight:700;font-size:24px;color:var(--blue-deep);background:var(--mist);
+  border:2px solid var(--line);border-radius:999px;padding:13px 28px;}
+
+/* ---------- link cards (slide 8) ---------- */
+.links{display:flex;flex-direction:column;gap:18px;margin-top:40px;}
+.link-card{display:flex;flex-direction:column;gap:4px;text-decoration:none;background:var(--mist);
+  border-left:7px solid var(--blue);border-radius:0 14px 14px 0;padding:18px 26px;max-width:840px;}
+.link-eyebrow{font-family:var(--body);font-weight:700;font-size:22px;letter-spacing:.02em;color:var(--muted);text-transform:uppercase;}
+.link-url{font-family:var(--head);font-weight:400;font-size:30px;color:var(--blue-deep);letter-spacing:.01em;word-break:break-all;}
+
+/* ---------- years (slide 9 closing) ---------- */
+.years{display:flex;align-items:center;gap:34px;margin-top:8px;}
+.years .yr{display:flex;flex-direction:column;font-family:var(--body);font-weight:700;font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.82);}
+.years .yr b{font-family:var(--head);font-weight:400;font-size:52px;letter-spacing:.02em;color:var(--gold);margin-bottom:2px;}
+.years .yr-div{width:2px;height:64px;background:rgba(255,255,255,.3);}
+
+/* ---------- animated goal card (slide 7) ---------- */
+.goalcard{position:absolute;width:402px;height:562px;border:9px solid #fff;border-radius:20px;
+  overflow:hidden;background:#fff;cursor:pointer;
+  box-shadow:0 26px 54px -22px rgba(21,72,107,.55), 0 6px 16px rgba(21,72,107,.18);}
+.gc-scale{position:absolute;top:0;left:0;width:589px;height:834px;transform-origin:top left;transform:scale(0.6519);}
+.gc-scale img.bg{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;-webkit-user-drag:none;}
+.gc-ring{position:absolute;border-radius:7px;pointer-events:none;background:rgba(245,179,1,0);
+  box-shadow:0 0 0 0 rgba(245,179,1,0);transition:box-shadow .35s ease, background .35s ease;}
+.gc-ring.active{box-shadow:0 0 0 4px rgba(245,179,1,.95), 0 0 26px 6px rgba(245,179,1,.5);background:rgba(245,179,1,.12);}
+.gc-ring.done{box-shadow:0 0 0 3px rgba(62,160,217,.55);background:rgba(255,255,255,0);}
+.gc-fld{position:absolute;display:flex;color:#20303b;font-family:Georgia,"Times New Roman",serif;
+  line-height:1.15;white-space:pre-wrap;align-items:center;pointer-events:none;}
+.gc-fld .caret{display:inline-block;width:2px;height:1em;background:#20303b;margin-left:1px;opacity:0;vertical-align:-2px;}
+.gc-fld.blink .caret{animation:gcblink .9s steps(1) infinite;opacity:1;}
+@keyframes gcblink{50%{opacity:0;}}
+#gc-f-goal{left:52px;top:266px;width:495px;height:82px;font-size:30px;}
+#gc-f-r1{left:84px;top:400px;width:455px;height:32px;font-size:22px;}
+#gc-f-r2{left:84px;top:444px;width:455px;height:32px;font-size:22px;}
+#gc-f-r3{left:84px;top:487px;width:455px;height:33px;font-size:22px;}
+#gc-f-team{left:52px;top:582px;width:500px;height:70px;font-size:26px;align-items:flex-start;padding-top:8px;}
+#gc-r-goal{left:34px;top:266px;width:525px;height:82px;}
+#gc-r-r1{left:67px;top:399px;width:480px;height:34px;}
+#gc-r-r2{left:67px;top:443px;width:480px;height:34px;}
+#gc-r-r3{left:67px;top:486px;width:480px;height:35px;}
+#gc-r-team{left:34px;top:578px;width:525px;height:78px;}
+
+/* ===================================================================
+   ENTRANCE — transform only (never strands content hidden)
+   =================================================================== */
+@media (prefers-reduced-motion:no-preference){
+  [data-deck-active] .hdr-title,
+  [data-deck-active] .kicker,
+  [data-deck-active] .lead,
+  [data-deck-active] .bullets li,
+  [data-deck-active] .cover-title,
+  [data-deck-active] .cover-kicker,
+  [data-deck-active] .cover-sub,
+  [data-deck-active] .sec-title,
+  [data-deck-active] .sec-kicker{animation:rise .55s backwards;}
+  [data-deck-active] .kicker,[data-deck-active] .cover-kicker,[data-deck-active] .sec-kicker{animation-delay:.05s;}
+  [data-deck-active] .hdr-title,[data-deck-active] .cover-title,[data-deck-active] .sec-title{animation-delay:.13s;}
+  [data-deck-active] .lead,[data-deck-active] .cover-sub{animation-delay:.22s;}
+  [data-deck-active] .bullets li:nth-child(1){animation-delay:.30s;}
+  [data-deck-active] .bullets li:nth-child(2){animation-delay:.38s;}
+  [data-deck-active] .bullets li:nth-child(3){animation-delay:.46s;}
+  [data-deck-active] .bullets li:nth-child(4){animation-delay:.54s;}
+  [data-deck-active] .bullets li:nth-child(5){animation-delay:.62s;}
+  [data-deck-active] .photo,[data-deck-active] .accent-block{animation:pop .6s backwards;}
+  [data-deck-active] .goalcard{animation:pop .6s .12s backwards;}
+  [data-deck-active] .photo{animation-delay:.30s;}
+  [data-deck-active] .photo:nth-of-type(2){animation-delay:.42s;}
+  [data-deck-active] .photo:nth-of-type(3){animation-delay:.54s;}
+  [data-deck-active] .accent-block{animation-delay:.20s;}
+}
+@keyframes rise{from{transform:translateY(24px);opacity:.001;}to{transform:none;opacity:1;}}
+@keyframes pop{from{transform:translateY(26px) scale(.97);opacity:.001;}to{transform:none;opacity:1;}}
