@@ -354,7 +354,9 @@
       try{window.postMessage({__omelette_presenting:on},'*');}catch(e){}
       document.body.classList.toggle('presenting',on);
     }
-    function inFull(){return document.fullscreenElement||document.webkitFullscreenElement;}
+    const fsMQ=window.matchMedia('(display-mode: fullscreen)');
+    /* true for Fullscreen API *and* browser/F11 fullscreen (display-mode query) */
+    function inFull(){return !!(document.fullscreenElement||document.webkitFullscreenElement)||fsMQ.matches;}
     function enter(){
       const el=document.documentElement;
       const rq=el.requestFullscreen||el.webkitRequestFullscreen;
@@ -379,8 +381,13 @@
       }
     });
     /* leaving fullscreen (Esc or browser UI) restores the editing rail + nav */
-    document.addEventListener('fullscreenchange',()=>{if(!inFull())setPresenting(false);});
-    document.addEventListener('webkitfullscreenchange',()=>{if(!inFull())setPresenting(false);});
+    /* keep presenting (rail/upcoming-slides hidden) in sync with fullscreen by ANY
+       means — Present button, F key, Esc, or the browser's own F11 fullscreen */
+    function syncFs(){setPresenting(inFull());}
+    document.addEventListener('fullscreenchange',syncFs);
+    document.addEventListener('webkitfullscreenchange',syncFs);
+    if(fsMQ.addEventListener)fsMQ.addEventListener('change',syncFs);
+    else if(fsMQ.addListener)fsMQ.addListener(syncFs);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
   else setTimeout(init,0);
