@@ -345,6 +345,47 @@
   else setTimeout(init,0);
 })();
 
+/* ---- Present / fullscreen control ---- */
+(function(){
+  function init(){
+    const deck=document.querySelector('deck-stage');
+    if(!deck) return;
+    function setPresenting(on){
+      try{window.postMessage({__omelette_presenting:on},'*');}catch(e){}
+      document.body.classList.toggle('presenting',on);
+    }
+    function inFull(){return document.fullscreenElement||document.webkitFullscreenElement;}
+    function enter(){
+      const el=document.documentElement;
+      const rq=el.requestFullscreen||el.webkitRequestFullscreen;
+      if(rq){try{const p=rq.call(el);if(p&&p.catch)p.catch(()=>{});}catch(e){}}
+      setPresenting(true);
+    }
+    function exit(){
+      if(inFull()){const ex=document.exitFullscreen||document.webkitExitFullscreen;if(ex)try{ex.call(document);}catch(e){}}
+      setPresenting(false);
+    }
+    const btn=document.createElement('button');
+    btn.id='present-btn';btn.type='button';
+    btn.innerHTML='<span aria-hidden="true">⛶</span> Present';
+    btn.title='Present full screen (press F, Esc to exit)';
+    btn.addEventListener('click',enter);
+    document.body.appendChild(btn);
+    window.addEventListener('keydown',e=>{
+      if((e.key==='f'||e.key==='F')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){
+        e.preventDefault();
+        /* toggle on presenting state so it works even if fullscreen was blocked */
+        if(document.body.classList.contains('presenting'))exit();else enter();
+      }
+    });
+    /* leaving fullscreen (Esc or browser UI) restores the editing rail + nav */
+    document.addEventListener('fullscreenchange',()=>{if(!inFull())setPresenting(false);});
+    document.addEventListener('webkitfullscreenchange',()=>{if(!inFull())setPresenting(false);});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else setTimeout(init,0);
+})();
+
 /* ---- Slide 7: animated goal-card fill ---- */
 (function(){
   function init(){

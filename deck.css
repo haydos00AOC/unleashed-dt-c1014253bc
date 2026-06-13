@@ -97,6 +97,20 @@ section{background:var(--paper);overflow:hidden;}
 /* full-bleed video (slide 2) — 1920×1080 source fills the stage exactly */
 .fb-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000;z-index:2;}
 
+/* ---------- Present / fullscreen button (added for live presenting) ---------- */
+#present-btn{
+  position:fixed;right:20px;bottom:20px;z-index:2147483600;
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.04em;
+  color:#fff;background:var(--blue-deep);border:0;border-radius:999px;
+  padding:11px 20px;cursor:pointer;opacity:.82;
+  box-shadow:0 8px 20px -6px rgba(14,49,72,.6);
+  transition:opacity .15s ease, background .15s ease, transform .15s ease;
+}
+#present-btn:hover{opacity:1;background:var(--blue);transform:translateY(-1px);}
+body.presenting #present-btn{display:none;}
+@media print{#present-btn{display:none;}}
+
 /* ---------- cover ---------- */
 .cover-logo{position:absolute;left:120px;top:120px;height:96px;z-index:3;}
 .cover-content{position:absolute;left:120px;bottom:150px;z-index:3;max-width:1200px;}
